@@ -6,8 +6,12 @@ import com.codewithmosh.store.dtos.CartItemDto;
 import com.codewithmosh.store.dtos.UpdateCartItemRequest;
 import com.codewithmosh.store.exceptions.CartNotFoundException;
 import com.codewithmosh.store.services.CartService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.hibernate.sql.ast.tree.expression.Summarization;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +23,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/carts")
+@Tag(name = "Carts") // naming the controller swagger doc
 public class CartController {
 
     private final CartService cartService;
@@ -35,7 +40,9 @@ public class CartController {
     }
 
     @PostMapping("/{cartId}/items")
+    @Operation(summary = "adds a product to cart") //tag to add description
     public ResponseEntity<CartItemDto> addToCart(
+            @Parameter(description = "The ID of the cart")
             @PathVariable UUID cartId,
             @RequestBody AddItemToCartRequest request
     ) {
