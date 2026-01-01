@@ -40,7 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         );
 
         authentication.setDetails(
-                new WebAuthenticationDetailsSource().buildDetails(request)
+                new WebAuthenticationDetailsSource().buildDetails(request) //attaches IP address, sessionID (if any) detects intrusion
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
