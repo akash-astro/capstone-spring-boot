@@ -4,8 +4,6 @@ import com.codewithmosh.store.entities.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Configuration;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
