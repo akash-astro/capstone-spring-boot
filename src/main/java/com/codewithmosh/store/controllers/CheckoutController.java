@@ -2,6 +2,7 @@ package com.codewithmosh.store.controllers;
 
 import com.codewithmosh.store.dtos.CheckoutRequest;
 import com.codewithmosh.store.dtos.CheckoutResponse;
+import com.codewithmosh.store.dtos.ErrorDto;
 import com.codewithmosh.store.entities.Order;
 import com.codewithmosh.store.entities.OrderItem;
 import com.codewithmosh.store.entities.OrderStatus;
@@ -36,13 +37,13 @@ public class CheckoutController {
         var cart = cartRepository.getCartWithItems(request.getCartId()).orElse(null);
         if(cart == null){
            return ResponseEntity.badRequest().body(
-                    Map.of("error", "cart not found")
+                   new ErrorDto("cart not found")
             );
         }
 
         if(cart.getItems().isEmpty()){
             return ResponseEntity.badRequest().body(
-                    Map.of("error", "cart is empty")
+                    new ErrorDto("cart is empty")
             );
         }
 
